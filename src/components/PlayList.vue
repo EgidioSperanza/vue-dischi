@@ -16,6 +16,7 @@ export default {
   },
   props: {
     discsList: Array,
+    waitUntil:Number
   },
 };
 </script>
