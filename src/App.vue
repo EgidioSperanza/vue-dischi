@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-header />
-    <play-list :discsList="discsList" />
+    <play-list :discsList="discsList" :isLoaded="isLoaded"/>
   </div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       discsList: [],
+      isLoaded:false
     };
   },
   mounted() {
@@ -26,6 +27,7 @@ export default {
       .get("https://flynn.boolean.careers/exercises/api/array/music")
       .then((result) => {
         this.discsList = result.data.response;
+        this.isLoaded=true;
       });
   },
 };
