@@ -3,8 +3,7 @@
     <app-header
       :discsByGenre="discsByGenre"
       :discsByAuthor="discsByAuthor"
-      @filterByGenre="filterByGenre"
-      @filterByAuthor="filterByAuthor"
+      @filterBy="filterBy"
     />
     <play-list :discsList="discsListFiltered" :isLoaded="isLoaded" />
   </div>
@@ -52,21 +51,12 @@ export default {
       })
   },
   methods: {
-    filterByGenre(genre) {
-      if (genre === 'All' || genre === '') {
+    filterBy(type, el) {
+      if (el === 'All' || el === '') {
         this.discsListFiltered = this.discsList
       } else {
         this.discsListFiltered = this.discsList.filter((disc) => {
-          return disc.genre.includes(genre)
-        })
-      }
-    },
-    filterByAuthor(author) {
-      if (author === 'All' || author === '') {
-        this.discsListFiltered = this.discsList
-      } else {
-        this.discsListFiltered = this.discsList.filter((disc) => {
-          return disc.author.includes(author)
+          return disc[type].includes(el)
         })
       }
     },

@@ -38,11 +38,11 @@ export default {
   methods: {
     filterByGender() {
       this.selectedAuthor = ''
-      this.$emit('filterByGenre', this.selectedGenre)
+      this.$emit('filterBy', 'genre', this.selectedGenre)
     },
     filterByAuthor() {
       this.selectedGenre = ''
-      this.$emit('filterByAuthor', this.selectedAuthor)
+      this.$emit('filterBy', 'author', this.selectedAuthor)
     },
   },
 }
