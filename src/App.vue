@@ -40,11 +40,13 @@ export default {
           if (!this.discsByGenre.includes(disc.genre)) {
             this.discsByGenre.push(disc.genre)
           }
+          return this.discsByGenre
         })
         this.discsList.filter((disc) => {
           if (!this.discsByAuthor.includes(disc.author)) {
             this.discsByAuthor.push(disc.author)
           }
+          return this.discsByAuthor
         })
         this.isLoaded = true
       })
