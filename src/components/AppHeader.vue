@@ -1,20 +1,24 @@
 <template>
   <header>
     <i class="fab fa-spotify"></i>
-    <select v-model="selectedGenre">
-      <option disabled value="">Please select one</option>
-      <option v-for="(genre, index) in discsByGenre" :key="index">
-        {{ genre }}
-      </option>
-    </select>
-    <span>Selected: {{ selectedGenre }}</span>
-    <select v-model="selectedAuthor">
-      <option disabled value="">Please select one</option>
-      <option v-for="(author, index) in discsByAuthor" :key="index">
-        {{ author }}
-      </option>
-    </select>
-    <span>Selected: {{ selectedAuthor }}</span>
+    <div class="filters">
+      <span>Filtra per Genere</span>
+      <select v-model="selectedGenre" @change="filterByGender()">
+        <option disabled value="">Please select one</option>
+        <option value="">All</option>
+        <option v-for="(genre, index) in discsByGenre" :key="index">
+          {{ genre }}
+        </option>
+      </select>
+      <span>Filtra per Autore</span>
+      <select v-model="selectedAuthor" @change="filterByAuthor()">
+        <option disabled value="">Please select one</option>
+        <option value="">All</option>
+        <option v-for="(author, index) in discsByAuthor" :key="index">
+          {{ author }}
+        </option>
+      </select>
+    </div>
   </header>
 </template>
 
@@ -29,7 +33,17 @@ export default {
   },
   props: {
     discsByGenre: Array,
-    discsByAuthor:Array,
+    discsByAuthor: Array,
+  },
+  methods: {
+    filterByGender() {
+      this.selectedAuthor = ''
+      this.$emit('filterByGenre', this.selectedGenre)
+    },
+    filterByAuthor() {
+      this.selectedGenre = ''
+      this.$emit('filterByAuthor', this.selectedAuthor)
+    },
   },
 }
 </script>
@@ -37,14 +51,20 @@ export default {
 <style scoped lang="scss">
 @import '@/style/variables.scss';
 header {
-  height: 50px;
+  height: 100px;
   background-color: $primary-light-color;
   padding-left: 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 i {
   color: $logo-color;
-  font-size: 30px;
+  font-size: 60px;
+}
+.filters{
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
 }
 </style>

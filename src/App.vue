@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <app-header :discsByGenre="discsByGenre" :discsByAuthor="discsByAuthor" />
+    <app-header
+      :discsByGenre="discsByGenre"
+      :discsByAuthor="discsByAuthor"
+      @filterByGenre="filterByGenre"
+      @filterByAuthor="filterByAuthor"
+    />
     <play-list :discsList="discsListFiltered" :isLoaded="isLoaded" />
   </div>
 </template>
@@ -43,6 +48,26 @@ export default {
         })
         this.isLoaded = true
       })
+  },
+  methods: {
+    filterByGenre(genre) {
+      if (genre === 'All' || genre === '') {
+        this.discsListFiltered = this.discsList
+      } else {
+        this.discsListFiltered = this.discsList.filter((disc) => {
+          return disc.genre.includes(genre)
+        })
+      }
+    },
+    filterByAuthor(author) {
+      if (author === 'All' || author === '') {
+        this.discsListFiltered = this.discsList
+      } else {
+        this.discsListFiltered = this.discsList.filter((disc) => {
+          return disc.author.includes(author)
+        })
+      }
+    },
   },
 }
 </script>

@@ -27,7 +27,6 @@ export default {
   width: calc((1200px / 5) - 30px);
   height: 400px;
   background-color: $primary-light-color;
-  margin-bottom: 20px;
   padding: 20px;
   text-align: center;
   display: flex;
