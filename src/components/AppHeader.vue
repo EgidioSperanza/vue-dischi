@@ -1,17 +1,26 @@
 <template>
   <header>
     <i class="fab fa-spotify"></i>
+    <div class="search">
+      <input
+        type="text"
+        placeholder="Please write about the title of the album and press enter"
+        v-model="typedTitle"
+        @change="searchByType"
+      />
+      <button @click="searchTypeReset">Reset</button>
+    </div>
     <div class="filters">
       <span>Filtra per Genere</span>
-      <select v-model="selectedGenre" @change="filterByGender()">
+      <select v-model="selectedGenre" @change="filterByGender">
         <option disabled value="">Please select one</option>
-        <option value="">All</option>
+        <option value="all">All</option>
         <option v-for="(genre, index) in discsByGenre" :key="index">
           {{ genre }}
         </option>
       </select>
       <span>Filtra per Autore</span>
-      <select v-model="selectedAuthor" @change="filterByAuthor()">
+      <select v-model="selectedAuthor" @change="filterByAuthor">
         <option disabled value="">Please select one</option>
         <option value="">All</option>
         <option v-for="(author, index) in discsByAuthor" :key="index">
@@ -29,6 +38,7 @@ export default {
     return {
       selectedGenre: '',
       selectedAuthor: '',
+      typedTitle: '',
     }
   },
   props: {
@@ -43,6 +53,15 @@ export default {
     filterByAuthor() {
       this.selectedGenre = ''
       this.$emit('filterBy', 'author', this.selectedAuthor)
+    },
+    searchByType() {
+      this.$emit('filterBy', 'title', this.typedTitle)
+    },
+    searchTypeReset() {
+      this.selectedAuthor = ''
+      this.selectedGenre = ''
+      this.typedTitle = ''
+      this.$emit('filterBy', 'title', this.typedTitle)
     },
   },
 }
@@ -62,7 +81,20 @@ i {
   color: $logo-color;
   font-size: 60px;
 }
-.filters{
+input {
+  width: 500px;
+  height: 50px;
+  line-height: 50px;
+}
+button {
+  height: 50px;
+  margin-left: 20px;
+  padding: 0 20px;
+  background-color: $background-color;
+  color: $text-color;
+  border-radius: 10px;
+}
+.filters {
   display: flex;
   flex-direction: column;
   margin-right: 20px;

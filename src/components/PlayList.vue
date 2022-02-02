@@ -31,7 +31,7 @@ export default {
 <style scoped lang="scss">
   main {
     width: 1200px;
-    padding-top: 50px;
+    padding: 50px 0;
     margin:0 auto;
 
     .loaded{

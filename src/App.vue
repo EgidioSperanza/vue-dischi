@@ -48,11 +48,15 @@ export default {
   },
   methods: {
     filterBy(type, el) {
-      if (el === 'All' || el === '') {
+      if (el === 'all' || el === '') {
         this.discsListFiltered = this.discsList
       } else {
         this.discsListFiltered = this.discsList.filter((disc) => {
-          return disc[type].includes(el)
+          if (type === 'title') {
+            return disc.title.toLowerCase().includes(el.toLowerCase())
+          }else{
+            return disc[type].includes(el)
+          }
         })
       }
     },
