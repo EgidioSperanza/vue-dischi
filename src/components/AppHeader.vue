@@ -6,7 +6,7 @@
         type="text"
         placeholder="Please write about the title of the album and press enter"
         v-model="typedTitle"
-        @change="searchByType"
+        @input="searchByType"
       />
       <button @click="searchTypeReset">Reset</button>
     </div>
