@@ -55,6 +55,8 @@ export default {
       this.$emit('filterBy', 'author', this.selectedAuthor)
     },
     searchByType() {
+      this.selectedAuthor = ''
+      this.selectedGenre = ''
       this.$emit('filterBy', 'title', this.typedTitle)
     },
     searchTypeReset() {
