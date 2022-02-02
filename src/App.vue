@@ -35,18 +35,14 @@ export default {
       .then((result) => {
         this.discsList = result.data.response
         this.discsListFiltered = this.discsList
-        this.discsList.filter((disc) => {
-          if (!this.discsByGenre.includes(disc.genre)) {
-            this.discsByGenre.push(disc.genre)
-          }
-          return this.discsByGenre
-        })
-        this.discsList.filter((disc) => {
-          if (!this.discsByAuthor.includes(disc.author)) {
-            this.discsByAuthor.push(disc.author)
-          }
-          return this.discsByAuthor
-        })
+        this.discsByGenre = this.discsList.map((disc) => disc.genre)
+        this.discsByGenre = this.discsByGenre.filter(
+          (genre, i) => this.discsByGenre.indexOf(genre) == i,
+        )
+        this.discsByAuthor = this.discsList.map((disc) => disc.author)
+        this.discsByAuthor = this.discsByAuthor.filter(
+          (author, i) => this.discsByAuthor.indexOf(author) == i,
+        )
         this.isLoaded = true
       })
   },
